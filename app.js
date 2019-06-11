@@ -119,7 +119,7 @@ const downloadPromise = (magnetURL) => {
                     console.log('download finished')
 
                     torrent.files.forEach((file) => {
-                        mv('C:/Users/espen/Desktop/start-master/download/' + file.name, 'F:/PlexMedia/Movies/' + file.name + '/', {
+                        mv('C:/Users/espen/Desktop/start-master/download/' + file.name, 'F:/PlexMedia/Movies/dlauto/', {
                             mkdirp: true
                         }, function(err) {
                             console.log('ERROR: ' + err)
@@ -144,7 +144,7 @@ const downloadPromise = (magnetURL) => {
 }
 
 function moveFile(file_name) {
-    mv(file_name, 'F:/PlexMedia/Movies/' + file_name, {
+    mv(file_name, 'F:/PlexMedia/Movies/autodl/', {
         mkdirp: true
     }, function(err) {
         console.log(err)
