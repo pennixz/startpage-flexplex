@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>flexPlex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    </script>
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="//fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="main-agileits">
+    	<h1>flexPlex</h1>
+        <div class="form-w3-agile">
+
+            <h2>Logg inn</h2>
+            <form action="/login/auth?" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="on">
+                <div class="form-sub-w3">
+                    <input type="text" name="uname" placeholder="Brukernavn" required="" />
+                    <div class="icon-w3">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="form-sub-w3">
+                    <input type="password" name="pwd" placeholder="Passord" required="" />
+                    <div class="icon-w3">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <p class="p-bottom-w3ls" id="errMessage"><a class="w3_play_icon1" href="#small-dialog1">  </a></p>
+
+                <div class="submit-w3l">
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="small-dialog1" class="mfp-hide">
+        <div class="contact-form1">
+            <div class="contact-w3-agileits">
+                <h3>Registrer Deg</h3>
+                <form action="/login/auth?" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="on">
+                    <div class="form-sub-w3ls">
+                        <input name="uname" placeholder="Brukernavn" type="text" required="">
+                        <div class="icon-agile">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="form-sub-w3ls">
+                        <input name="email" placeholder="Email" class="mail" type="email" required="">
+                        <div class="icon-agile">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="form-sub-w3ls">
+                        <input name="pwd" placeholder="Passord" type="password" required="">
+                        <div class="icon-agile">
+                            <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                 
+            </div>
+          
+            <div class="submit-w3l">
+                <input type="submit" value="Registrer">
+            </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+</body>
+
+</html>

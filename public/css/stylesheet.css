@@ -1,0 +1,169 @@
+
+html, body {
+	margin: 0;
+}
+.weatherBar {
+	margin: 25px auto;
+	width: 50%;
+	height:40px;
+	display:flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.sub {
+	margin: 0;
+	display:inline;
+	opacity: 0.65;
+	font: 1em 'Roboto Condensed', sans-serif;
+}
+/* Body */
+body {
+	/*background: url("https://blog.hdwallsource.com/wp-content/uploads/2014/11/gradient-wallpaper-26050-26735-hd-wallpapers.jpg");*/
+	/*background-repeat:no-repeat;
+	background-size:auto;
+	background-position:center;*/
+	background: rgb(64,58,62);
+	background: linear-gradient(0deg, rgba(64,58,62,1) 0%, rgba(190,88,105,1) 100%);
+	font: 1.2em 'Roboto', sans-serif;
+	font-weight: 300;
+	color: #FFF;
+	margin:0;
+	}
+.preload {
+	transition: none;
+	}
+h1 {
+	font: 4.0em 'Lobster', cursive;
+	opacity: 100%;
+	text-align: center;
+	margin:55px 0px;
+	}
+
+
+/* Links */
+ul {
+	list-style-type: none;
+	margin-top: 8px;
+	padding-left: 0;
+	}
+li {
+	padding-left: 16px;
+	border-radius: 20px;
+	height: 24px;
+	}
+li:hover {
+	background: #EEE;
+	box-shadow: 0 0 6px #FFF;
+	transition: 0.15s linear;
+	}
+li a {
+	margin-left: -16px;
+	padding: 0 8px;
+	}
+a {
+	display: block;
+	width: 100%;
+	color: #FFF;
+	text-decoration: none;
+	cursor: default;
+	}
+a:hover {
+	color: #000;
+	transition: 0.15s linear;
+	}
+
+
+/* Containers */
+.spacebtwn {
+	width: 100%;
+	display: flex;
+	flex-wrap:wrap;
+	justify-content: center;
+}
+#boxes {
+	width: 99%;
+	margin: 0 1%;
+	display: flex;
+	flex-wrap:wrap;
+	justify-content:center;
+	}
+.box {
+	width: 15rem;
+	margin: 0 3px;
+	opacity: 0.85;
+	transition: 0.15s linear;
+	}
+.box:hover, .sbox:hover, .qbox:hover, .weatherBar:hover {
+	opacity: 1.0;
+	transition: 0.15s linear;
+	}
+.box h4, .sbox h4, .qbox h4 {
+	margin: 0 0 0 0;
+	font: 1.5em 'Roboto Condensed', sans-serif;
+	text-align: center;
+	border-bottom: 1px #FFF solid;
+	}
+
+
+/* Search Boxes */
+.qbox p {
+	text-align: center;
+}
+.sbox, .qbox {
+	width: 20rem;
+	opacity: 0.7;
+	margin: 0 5rem;
+	transition: 0.15s linear;
+	}
+#search {
+	width: 100%;
+	margin-top: 8px;
+	border-spacing: 1px;
+	}
+form {
+	height: 25px;
+	}
+td a {
+	font-size: 1.2em;
+	font-weight: 300;
+	border-radius: 20px;
+	line-height: 25px;
+	}
+td:hover a {
+	background: #EEE;
+	box-shadow: 0 0 4px #FFF;
+	color: #000;
+	transition: 0.15s linear;
+	}
+td {
+	padding: 0 0 0 0;
+	min-height: 25px;
+	max-height: 25px;
+	margin-top: -2px;
+	}
+td:nth-child(1) {
+	float: left;
+	width: 30%;
+	text-align: center;
+	}
+td:nth-child(2) {
+	float: right;
+	width: 65%;
+	}
+input {
+	height: 20px;
+	width: 80%;
+	margin-top: 2px;
+	padding: 0 0 0 8px;
+	border: none;
+	border-radius: 20px;
+	opacity: 0.8;
+	cursor: default;
+	transition: 0.15s linear;
+	}
+input:hover, input:focus {
+	width: 100%;
+	opacity: 1.0;
+	box-shadow: 0 0 4px #FFF;
+	}

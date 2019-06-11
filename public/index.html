@@ -1,0 +1,154 @@
+<html>
+<head>
+	<link href='http://fonts.googleapis.com/css?family=Lobster|Roboto|Roboto:300|Roboto+Condensed' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Start</title>
+
+	<script>
+	window.addEventListener('preload', function load() {
+	window.removeEventListener('preload', load, false);
+	document.body.classList.remove('preload');
+	}, false);
+	</script>
+	
+</head>
+<body class="preload">
+	 
+	<h1>What'cha gon' do?</h1>
+
+	<div id="boxes">
+
+		<div class="box"><h4>Sosialt</h4>
+			<ul>
+				<li><a href="https://facebook.com"> Facebook </a></li>
+				<li><a href="https://www.reddit.com/"> Reddit</a></li>
+				<li><a href="https://www.diskusjon.no/"> Diskusjon.no </a></li>
+				<li><a href="https://freak.no/"> Freakforum </a></li>
+				<li><a href="https://twitter.com"> Twitter </a></li>
+				<li><a href="https://github.com"> Github </a></li>
+			</ul>
+		</div>
+
+		<div class="box"><h4>Underholdning</h4>
+			<ul>
+				<li><a href="https://youtube.com"> Youtube</a></li>
+				<li><a href="https://twitch.tv"> Twitch.tv </a></li>
+				<li><a href="https://instagram.com"> Instagram </a></li>
+				<li><a href="https://geoguessr.com"> GeoGuessr </a></li>
+				<li><a href="https://www.liveleak.com/"> LiveLeak </a></li>
+				<li><a href="https://www.kongregate.com/"> Kongregate </a></li>
+				<li><a href="https://pointerpointer.com/"> PointerPointer? </a></li>
+				<li><a href="https://www.reddit.com/r/InternetIsBeautiful/"> r/InternetIsBeautiful </a></li>
+				<li><a href="https://informationisbeautiful.net/"> InformationIsBeautiful </a></li>
+			</ul>
+		</div>
+		<div class="box"><h4>Nyheter</h4>
+			<ul>
+				<li><a href="https://vg.no"> VG </a></li>
+				<li><a href="https://adressa.no"> Adressa </a></li>
+				<li><a href="https://nrk.no"> NRK </a></li>
+				<li><a href="https://dagbladet.no"> Dagbladet </a></li>
+				<li><a href="https://www.reddit.com/r/worldnews"> r/WorldNews </a></li>
+				<li><a href="https://sciencedaily.com"> ScienceDaily </a></li>
+				<li><a href="https://nasa.gov"> NASA </a></li>
+				<li><a href="https://twitter.com/PolitiTrondelag"> PolitietTrøndelag twitter </a></li>
+				
+			</ul>
+		</div>
+		<div class="box"><h4>Etc.</h4>
+			<ul>
+				
+				<li><a href="https://drive.google.com/drive/my-drive"> Google Drive </a></li>
+				<li><a href="https://wikipedia.org"> Wikipedia </a></li>
+				<li><a href="https://speedtest.net"> SpeedTest </a></li>
+				<li><a href="https://songsterr.com"> Songsterr </a></li>
+				
+				<li><a href="https://codewars.com"> Codewars </a></li>
+				<li><a href="https://archive.org"> Internet Archive </a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="spacebtwn">
+		<div class="qbox">
+			<h4>Quote of the Day</h4>
+			<p id="quote"></p>
+			<p>- <em id="author">Author Rick</em></p>
+		</div>
+		<div class="sbox"><h4>Search</h4>
+			<table id="search">
+				<tr>
+					<td><a href="https://google.com">Google</a></td>
+					<td>
+						<form role="search" action="http://www.google.com/search?q=" method="get">
+						<input type="text" name="q" autofocus/></form>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><a href="https://www.duckduckgo.com">DuckDuckGo</a></td>
+					<td>
+						<form action="https://duckduckgo.com/?q=" method="get">
+						<input type="text" name="q" /></form>
+					</td>
+				</tr>
+
+				<tr>
+					<td><a href="https://finn.no">Finn</a></td>
+					<td>
+						<form action="https://www.finn.no/globalsearchlander?searchKeys=&q=" method="get">
+						<input type="text" name="q" autofocus/></form>
+					</td>
+				</tr>
+
+				<tr>
+					<td><a href="https://komplett.no">Komplett</a></td>
+					<td>
+						<form action="https://www.komplett.no/search?q=" method="get">
+						<input type="text" name="q" autofocus/></form>
+					</td>
+				</tr>
+
+				<tr>
+					<td><a href="https://prisjakt.no">Prisjakt</a></td>
+					<td>
+						<form action="https://www.prisjakt.no/search?search=sd" method="get">
+						<input type="text" name="q" autofocus/></form>
+					</td>
+				</tr>
+
+				<tr>
+					<td><a href="https://songsterr.com">Songsterr</a></td>
+					<td>
+						<form action="https://www.songsterr.com/a/wa/search?pattern=" method="get">
+						<input type="text" name="q" autofocus/></form>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+			<div class="container">
+				<div class="weatherBar" style="margin-top:2rem;">
+					<img id="symbol" style="-webkit-user-select: none;" src="">
+					<h4 class="sub">Temperatur: <span id="temperature"></span>°c</h4>
+					<h4 class="sub">Regn: <span id="rain"></span> mm</h4>
+					<h4 class="sub">Vind: <span id="wind"></span> ms <span id="windDirection"></span></h4>
+					<h4 class="sub">Fuktighet: <span id="humidity"></span> %</h4>
+					<h4 class="sub">Tåke: <span id="fogginess"></span> %</h4>
+					
+				</div>
+				<div class="weatherBar">
+					
+					<h4 class="sub">Skydekke: <span id="cloudiness"></span> %</h4>
+					<h4 class="sub">Lave skyer: <span id="lowClo"></span> %</h4>
+					<h4 class="sub">Medium skyer: <span id="medClo"></span> %</h4>
+					<h4 class="sub">Høye skyer: <span id="highClo"></span> %</h4>
+				</div>
+			</div>
+	<script src="js/quote.js"></script>
+	<script src="js/weather.js"></script>
+	
+</body>
+</html>

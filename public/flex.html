@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>FlexPlex, the Plex flexer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <style>
+		ul {
+			list-style-type: none;
+			margin: 15px 0px;
+		}
+		ul > li {
+			width: 20%;
+		}
+		a {
+			text-decoration: none;
+			color: #33333;
+		}
+		a:hover {
+			background-color: black;
+			color: white;
+		}
+
+		.flex {
+			display:flex;
+			flex-wrap:wrap;
+			justify-content: space-around;
+			align-items: center;
+		}
+		html {
+			background: grey;
+		}
+	</style>
+</head>
+<body>
+		<h1>Hey</h1>
+<!-- 		<form action="/flex/topTorrents?" enctype="application/x-www-form-urlencoded" method="POST">
+			<select name="selection" onchange="this.form.submit()">
+		        <option value="">All</option>
+		        <option value="100">Audio</option>
+		        <option value="200">Video</option>
+		        <option value="300">Applications</option>
+		        <option value="400">Games</option>
+		        <option value="500">Porn</option>
+		        <option value="600">Other</option>
+		    </select>
+		</form>
+		<form action="/flex/getMovies?" enctype="application/x-www-form-urlencoded" method="GET">
+			<input type="submit" value="Hent verifiserte HD filmer">
+		</form> -->
+		<div>
+			<a href="#" onclick="getTopVideo()">get top video</a>
+			<a href="#" onclick="getTopPorn()">get top xxx</a>
+		</div>
+	<div >
+			<ul id="t" class="flex">
+			</ul>
+	</div>
+		<script src="js/flex.js">
+		</script>
+</body>
+</html>
