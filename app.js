@@ -8,14 +8,14 @@ const WebTorrent = require('webtorrent')
 const mv = require('mv')
 const PlexAPI = require('plex-api')
 const credentials = require('plex-api-credentials');
+const fs = require('fs')
 
 let MongoClient = require('mongodb').MongoClient;
 let url = "mongodb://localhost:27017/";
 
 let client = new WebTorrent()
 
-const loginRoute = require('./src/api/routes/login')
-const downloadRoute = require('./src/api/routes/download')
+let currentlyDownloading = false;
 
 app.use(express.static(__dirname + "/public/"))
 app.use(cookieParser())
@@ -39,7 +39,7 @@ let auther = (req, res, next) => {
 
 app.get('/', (req, res) => res.sendFile(__dirname + "login.html"));
 app.get('/login', (req, res) => res.sendFile(__dirname + "/public/" + "login.html"));
-app.get('/flex', (req, res) => {
+app.get('/flex', auther, (req, res) => {
     res.sendFile(__dirname + '/flex.html');
 })
 
@@ -74,7 +74,7 @@ app.post('/login/auth', (req, res) => {
     })
 })
 
-app.get('/flex/updateLibrary', (req, res) => {
+app.get('/flex/updateLibrary', auther, (req, res) => {
     updateLibrary()
     res.writeHead(302, {
         'Location': '/flex'
@@ -82,23 +82,25 @@ app.get('/flex/updateLibrary', (req, res) => {
     res.end()
 })
 
-app.get('/logout', (req, res) => {
+app.get('/logout', auther, (req, res) => {
     req.session.destroy()
     res.writeHead(302, {
         'Location': '/login'
     })
     res.end()
 })
-
+app.get('/flex/downloading', auther, (req, res) => {
+    res.send(currentlyDownloading)
+})
 
 function updateLibrary() {
     const userAndPass = credentials({
         username: 'espen_hardcore',
-        password: 'Lespen92L',
+        password: '***',
 
     })
     let plexClient = new PlexAPI({
-        hostname: '192.168.0.100',
+        hostname: '192.168.0.108',
         authenticator: userAndPass
     })
     plexClient.perform("/library/Movies/refresh").then(function() {
@@ -112,53 +114,47 @@ function updateLibrary() {
 const downloadPromise = (magnetURL) => {
     return new Promise((res, rej) => {
         client.add(magnetURL, {
-            path: './download/'
+            path: 'F:/PlexMedia/Movies/dlauto/'
         }, torrent => {
             console.log('download started')
+            currentlyDownloading = true
             torrent.on('done', () => {
-                    console.log('download finished')
-
-                    torrent.files.forEach((file) => {
-                        mv('C:/Users/espen/Desktop/start-master/download/' + file.name, 'F:/PlexMedia/Movies/dlauto/', {
-                            mkdirp: true
-                        }, function(err) {
-                            console.log('ERROR: ' + err)
-                        });
-
-
-                    })
-                    updateLibrary()
-                    res(torrent)
-                })
-                // torrent.on('download', () => {
-
-            //     // console.log('progress: ' + torrent.progress * 100 + '% ')
-
-            // })
+                console.log('download finished')
+                currentlyDownloading = false
+                updateLibrary()
+                res(torrent)
+            })
         })
         client.on('error', function(err) {
             rej(err)
+            currentlyDownloading = false
             console.error('ERROR: ' + err.message)
         })
     })
 }
 
-function moveFile(file_name) {
-    mv(file_name, 'F:/PlexMedia/Movies/autodl/', {
-        mkdirp: true
-    }, function(err) {
+function moveFile(src, end) {
+    var source = fs.createReadStream(src);
+    var dest = fs.createWriteStream(end);
+
+    source.pipe(dest);
+    source.on('end', function() {
+        console.log('copied')
+    });
+    source.on('error', function(err) {
         console.log(err)
-    })
+    });
 }
 
-app.get('/flex/special/move', (req, res) => {
-    moveFile('The.Queen\'s.Corgi.2019.1080p.BluRay.x264-[YTS.AM]')
+app.get('/flex/special/move', auther, (req, res) => {
+    moveFile()
     res.writeHead(302, {
         'Location': '/flex'
     })
+    res.end()
 })
 
-app.post('/flex/dlFile', (req, res) => {
+app.post('/flex/dlFile', auther, (req, res) => {
     let newPromise = downloadPromise(req.body.key)
     res.writeHead(302, {
         'Location': '/flex/'
@@ -167,7 +163,7 @@ app.post('/flex/dlFile', (req, res) => {
 })
 
 
-app.get('/flex/getMovies', (req, res) => {
+app.get('/flex/getMovies', auther, (req, res) => {
     PirateBay.search('', {
         category: 'video',
         filter: {
@@ -185,7 +181,7 @@ app.get('/flex/getMovies', (req, res) => {
         res.send(temp)
     }).catch(err => console.log(err))
 })
-app.get('/flex/topPornTorrents', (req, res) => {
+app.get('/flex/topPornTorrents', auther, (req, res) => {
     PirateBay.topTorrents(500).then((data) => {
             res.send(data)
         })
@@ -194,7 +190,7 @@ app.get('/flex/topPornTorrents', (req, res) => {
         })
 })
 
-app.get('/flex/topVideoTorrents', (req, res) => {
+app.get('/flex/topVideoTorrents', auther, (req, res) => {
     PirateBay.topTorrents(200).then((data) => {
             res.send(data)
         })
@@ -203,6 +199,19 @@ app.get('/flex/topVideoTorrents', (req, res) => {
         })
 })
 
+app.post('/flex/search', auther, (req, res) => {
+    PirateBay.search(req.body.query, {
+            filter: {
+                verified: true
+            }
+        })
+        .then((results) => {
+            res.send(results)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+})
 
 let server = app.listen(8080, () => {
     let host = server.address().address;

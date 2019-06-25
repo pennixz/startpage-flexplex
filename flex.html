@@ -1,67 +1,18 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>FlexPlex, the Plex flexer</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    <link type="text/css" rel="stylesheet" href="css/bulma.min.css"/>
     <style>
-    	@media only screen and (max-width: 600px) {
-    		a {
-    			width: 100% !important;
-    			height: 35px !important;
-    			vertical-align: middle;
-    		}
-    		.flex {
-    			flex-direction: column;
-    		}
-    		ul {
-    			padding:0 !important;
-    		}
-    	}
-
-		ul {
-			list-style-type: none;
-			margin: 15px 0px;
-		}
-		ul > li {
-			width: 20%;
-			padding: 5px 7px;
-			border:1px solid black;
-		}
-		a {
-			text-decoration: none;
-			color: white;
-			width: 20%;
-			border-radius: 7px;
-			padding: 5px 7px;
-		}
-		a:hover {
-			background-color: black;
-		}
-		.container{
-			width: 100%;
-			text-align: center;
-		}
-		.flex {
-			display:flex;
-			flex-wrap:wrap;
-			justify-content: space-around;
-			align-items: center;
-		}
-		input{
-			margin: 10px;
-			border-radius: 5px;
-			opacity: 0.75;
-		}
-		html {
-			background: grey;
-		}
+    	
 	</style>
 </head>
 <body>
-	<div class='container'>
-<h1><a href="/flex/">.....</a></h1>
+	<div class='box'>
+
 <!-- 		<form action="/flex/topTorrents?" enctype="application/x-www-form-urlencoded" method="POST">
 			<select name="selection" onchange="this.form.submit()">
 		        <option value="">All</option>
@@ -77,84 +28,22 @@
 			<input type="submit" value="Hent verifiserte HD filmer">
 		</form> -->
 		<div>
-			<a id='vbtn' href="#" onclick="getTopVideo()">get top video</a>
-			<a id='pbtn' href="#" onclick="getTopPorn()">get top xxx</a>
+			<a id='vbtn' class="button" href="#">get top video</a>
+			<a id='pbtn' class="button" href="#">get top xxx</a>
+			<p>Is currently downloading: <span id='dlspan'></span></p>
 			
 		</div>
 		<div id="t_t"></div>
-		<form>
-		<input/>
-		<button>søk</button>
-	</form>
+		
+		<input id="searchQuery" name="query" placeholder="Søk i torrents" required=""/>
+		<a class="button" id="goQuery">Søk</a>
+		
 	<div >
-			<ul id="t" class="flex">
+			<ul id="t" class="box">
 			</ul>
 	</div>
-		<script>
-			window.onload = () => {
-    let t = document.getElementById('t')
-    let topPornBtn = document.getElementById('pbtn')
-    let topVidBtn = document.getElementById('vbtn')
-
-    function getTopVideo() {
-        fetch('http://192.168.0.100:8080/flex/topVideoTorrents')
-            .then((response) => {
-                return response.text()
-            })
-            .then((res) => {
-                createList(res)
-            })
-    }
-
-    function getTopPorn() {
-        console.log('got porn')
-        fetch('http://192.168.0.100:8080/flex/topPornTorrents')
-            .then((response) => {
-                return response.text()
-            })
-            .then((res) => {
-                createList(res)
-            })
-    }
-
-    function post(path, params, method = 'post') {
-        const form = document.createElement('form');
-        form.method = method;
-        form.action = path;
-        const hiddenField = document.createElement('input');
-        hiddenField.type = 'hidden';
-        hiddenField.name = 'key';
-        hiddenField.value = params;
-        console.log(hiddenField.value)
-        form.appendChild(hiddenField);
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    function downloadFile(magnetURL) {
-        post('/flex/dlFile', magnetURL)
-    }
-
-    function createList(obj) {
-        let t = document.getElementById('t')
-        let parsed = JSON.parse(obj)
-        for (let i = 0; i < parsed.length; i++) {
-            let newElement = document.createElement('li')
-            let uri = document.createElement('a')
-            uri.innerHTML = parsed[i].name.replace(/\./g, ' ') + "size: " + parsed[i].size
-            uri.href = '#'
-            uri.onclick = () => {
-                downloadFile(parsed[i].magnetLink)
-                console.log(parsed[i].magnetLink)
-            }
-            uri.append(newElement)
-            t.append(uri)
-        }
-    }
-    topPornBtn.addEventListener('click', () => getTopPorn())
-    topVidBtn.addEventListener('click', () => getTopVideo())
-}
+		<script src="flex.js">
+			
 		</script>
 </body>
 </html>
