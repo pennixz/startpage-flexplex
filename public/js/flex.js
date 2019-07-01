@@ -3,13 +3,26 @@ let topPornBtn = document.getElementById('pbtn')
 let topVidBtn = document.getElementById('vbtn')
 let queryBtn = document.getElementById('goQuery')
 
-function workPlz() {
-    searchTorrents()
+function postPromise() {
+    return new Promise((res, rej) => {
+        let x = document.getElementById('searchQuery').value
+        res(post('/flex/search', x))
+    })
 }
 
 function searchTorrents() {
+    // let searchPromise = postPromise()
+    // searchPromise.then((res) => {
+    //     createList(res)
+    // })
     let x = document.getElementById('searchQuery').value
-    post('/flex/search', x)
+    fetch('http://192.168.0.103:8080/flex/search?movie=' + x)
+        .then((response) => {
+            return response.text()
+        })
+        .then((res) => {
+            createList(res)
+        })
 }
 
 function getTopVideo() {
@@ -47,7 +60,8 @@ function post(path, params, method = 'post') {
 }
 
 function downloadFile(magnetURL) {
-    post('/flex/dlFile', magnetURL)
+    fetch('http://192.168.0.103:8080/flex/dlFile?file=' + magnetURL)
+    alert('Download started')
 }
 
 function checkIsDownloading() {
@@ -66,17 +80,16 @@ function createList(obj) {
     let parsed = JSON.parse(obj)
     for (let i = 0; i < parsed.length; i++) {
         let uri = document.createElement('a')
-        uri.innerHTML = parsed[i].name.replace(/\./g, ' ') + " size: " + parsed[i].size
+        uri.innerHTML = parsed[i].name.replace(/\./g, ' ') + " size: " + parsed[i].size + " seeds: " + parsed[i].seeders
         uri.href = '#'
             // uri.className = 'button'
         uri.onclick = () => {
             downloadFile(parsed[i].magnetLink)
-            console.log(parsed[i].magnetLink)
         }
         t.append(uri)
     }
 }
-topPornBtn.addEventListener('click', () => getTopPorn())
+// topPornBtn.addEventListener('click', () => getTopPorn())
 topVidBtn.addEventListener('click', () => getTopVideo())
-queryBtn.addEventListener('click', () => workPlz())
+queryBtn.addEventListener('click', () => searchTorrents())
 setInterval(checkIsDownloading(), 3000)

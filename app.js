@@ -26,6 +26,5 @@ app.use('/', require('./src/api/routes/flexRoutes'))
 let server = app.listen(8080, () => {
     let host = server.address().address
     let port = server.address().port
-
     console.log("Listening on 8080")
 })

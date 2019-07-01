@@ -7,24 +7,23 @@ module.exports = function() {
     let currentlyDownloading = false;
 
     router.get('/flex', helper.auther, (req, res) => {
-        res.sendFile(path.join(__dirname + '/../../../flex.html'));
-    })
-
-
-    router.get('/flex/updateLibrary', helper.auther, (req, res) => {
-        helper.updateLibrary()
-        res.writeHead(302, {
-            'Location': '/flex'
-        })
-        res.end()
+        res.sendFile(path.join(__dirname + '../../../../public/flex.html'));
     })
 
     router.get('/flex/downloading', helper.auther, (req, res) => {
         res.send(currentlyDownloading)
     })
 
-    router.post('/flex/dlFile', helper.auther, (req, res) => {
-        let newPromise = helper.downloadPromise(req.body.key)
+    router.all('/flex/toggleDownloading', helper.auther, (req, res) => {
+        currentlyDownloading ? currentlyDownloading = false : currentlyDownloading = true
+        res.writeHead(302, {
+            'Location': '/flex'
+        })
+        res.end()
+    })
+
+    router.get('/flex/dlFile', helper.auther, (req, res) => {
+        let newPromise = helper.downloadPromise(req.query.file)
         res.writeHead(302, {
             'Location': '/flex/'
         })
@@ -49,8 +48,10 @@ module.exports = function() {
             })
     })
 
-    router.post('/flex/search', helper.auther, (req, res) => {
-        PirateBay.search(req.body.key, {
+    router.get('/flex/search', helper.auther, (req, res) => {
+        console.log('Search made for: ' + req.query.movie)
+        PirateBay.search(req.query.movie, {
+                category: 'video',
                 filter: {
                     verified: true
                 }

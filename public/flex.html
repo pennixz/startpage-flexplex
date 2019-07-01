@@ -1,40 +1,20 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>FlexPlex, the Plex flexer</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    <link type="text/css" rel="stylesheet" href="css/bulma.min.css"/>
     <style>
-		ul {
-			list-style-type: none;
-			margin: 15px 0px;
-		}
-		ul > li {
-			width: 20%;
-		}
-		a {
-			text-decoration: none;
-			color: #33333;
-		}
-		a:hover {
-			background-color: black;
-			color: white;
-		}
-
-		.flex {
-			display:flex;
-			flex-wrap:wrap;
-			justify-content: space-around;
-			align-items: center;
-		}
-		html {
-			background: grey;
-		}
+    	a {
+    		display: block;
+    	}
 	</style>
 </head>
 <body>
-		<h1>Hey</h1>
+	<div class='box'>
+
 <!-- 		<form action="/flex/topTorrents?" enctype="application/x-www-form-urlencoded" method="POST">
 			<select name="selection" onchange="this.form.submit()">
 		        <option value="">All</option>
@@ -50,14 +30,22 @@
 			<input type="submit" value="Hent verifiserte HD filmer">
 		</form> -->
 		<div>
-			<a href="#" onclick="getTopVideo()">get top video</a>
-			<a href="#" onclick="getTopPorn()">get top xxx</a>
+			<a id='vbtn' class="button" href="#">get top video</a>
+	<!-- 		<a id='pbtn' class="button" href="#">get top xxx</a> -->
+			<p>Is currently downloading: <span id='dlspan'></span></p>
+			
 		</div>
+		<div id="t_t"></div>
+		
+		<input id="searchQuery" placeholder="Søk i torrents" required=""/>
+		<a href="#" class="button" id="goQuery">Søk</a>
+		
 	<div >
-			<ul id="t" class="flex">
+			<ul id="t" class="box">
 			</ul>
 	</div>
 		<script src="js/flex.js">
+			
 		</script>
 </body>
 </html>
