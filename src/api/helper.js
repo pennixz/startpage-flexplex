@@ -1,27 +1,8 @@
-function updateLibrary() {
-    const PlexAPI = require('plex-api')
-    const credentials = require('plex-api-credentials');
-    const userAndPass = credentials({
-        username: 'espen_hardcore',
-        password: 'Lespen92L',
-
-    })
-    let plexClient = new PlexAPI({
-        hostname: '192.168.0.103',
-        authenticator: userAndPass
-    })
-    plexClient.perform("/library/Movies/refresh").then(function() {
-        console.log('library refreshed')
-    }, function(err) {
-        console.error("Could not connect to server", err);
-    })
-}
-
 module.exports = {
     downloadPromise: (magnetURL) => {
+        const libr = require('./updateLib.js')
         const WebTorrent = require('webtorrent')
         let client = new WebTorrent()
-
         return new Promise((res, rej) => {
             client.add(magnetURL, {
                 path: 'F:/PlexMedia/Movies/dlauto/'
@@ -31,7 +12,7 @@ module.exports = {
                 torrent.on('done', () => {
                     console.log('download finished')
                     fetch('http://192.168.0.103:8080/toggleDownloading')
-                    updateLibrary()
+                    libr.updateLibrary()
                     res(torrent)
                 })
             })
